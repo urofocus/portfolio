@@ -47,5 +47,7 @@ Search for these in each `index.html` and put in your own details.
 ## Notes
 
 - Fonts load from Google Fonts, so no extra files are needed.
-- The page background animation stays still for visitors who have "reduce motion" turned on.
+- `assets/theme.css` holds the colors and fonts for all three pages. Change the values at the top to restyle the whole site.
+- `assets/anim.css` and `assets/anim.js` hold the page animations. `assets/bg.js` draws the dot-grid background.
+- All animation stays still for visitors who have "reduce motion" turned on.
 - On the security page, only describe testing on systems you own or have written permission to test.
