@@ -7,181 +7,154 @@
 <title>Design &amp; Security Portfolio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one calm column. Hero thesis, an index of two pages written like URL paths, then about, skills, projects, contact. */
 :root {
-  --bg: #f6f7f9;
-  --card: #ffffff;
-  --ink: #111318;
-  --muted: #596074;
-  --line: #d9dce6;
-  --design: #2b4bff;
-  --sec: #0b8a68;
-  --fx-a: #2a6fc4; --fx-b: #f3a15a; --fx-c: #f7dcc2; --veil: 42%;
-  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --bg: #f3f6fa; --card: #ffffff; --ink: #0b1120; --muted: #586277; --line: #dce2ec;
+  --design: #3a5bff; --accent: #3a5bff; --sec: #0e9aa7; --pop: #cbd9ff; --on-accent: #ffffff;
+  --fx-a: #8391ab; --fx-b: #3a5bff;
+  --display: "Sora", "Helvetica Neue", Arial, sans-serif;
   --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0d0f13; --card: #151820; --ink: #eceef3; --muted: #9ba1b2; --line: #272b37;
-    --design: #8ea1ff; --sec: #3ccf9f; --fx-a: #16336f; --fx-b: #b8652f; --fx-c: #8a6a58; --veil: 58%; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0d0f13; --card: #151820; --ink: #eceef3; --muted: #9ba1b2; --line: #272b37;
-  --design: #8ea1ff; --sec: #3ccf9f; --fx-a: #16336f; --fx-b: #b8652f; --fx-c: #8a6a58; --veil: 58%; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65;
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 20px 48px;
 }
 a { color: inherit; }
-a:focus-visible { outline: 3px solid var(--design); outline-offset: 4px; border-radius: 4px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.fx { position: fixed; z-index: 0; pointer-events: none; }
 .wrap { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-.fx { position: fixed; left: -4%; top: -4%; width: 108%; height: 108%; z-index: 0; filter: blur(14px); pointer-events: none; }
-.veil { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: color-mix(in srgb, var(--bg) var(--veil), transparent); }
-.mono { font-family: var(--mono); }
 
-/* bar */
+/* top bar */
 .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding-block: 8px; }
-.logo { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -0.01em; text-decoration: none; }
+.logo { font-family: var(--display); font-weight: 600; font-size: 20px; text-decoration: none; letter-spacing: -0.02em; }
 .bar nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; }
 .bar nav a { color: var(--muted); text-decoration: none; }
-.bar nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.bar nav a:hover { color: var(--ink); }
 
 /* hero */
-.hero { padding-block: clamp(48px, 10vw, 104px) clamp(40px, 7vw, 72px); }
+.hero { padding-block: clamp(56px, 11vw, 112px) clamp(48px, 8vw, 80px); }
 .status { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--mono); font-size: 13px; color: var(--muted); margin: 0 0 28px; }
 .status b { font-weight: 500; color: var(--ink); }
-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 9.5vw, 112px); line-height: 0.96; letter-spacing: -0.035em; margin: 0 0 28px; text-wrap: balance; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(40px, 9vw, 96px); line-height: 1.02; letter-spacing: -0.045em; margin: 0 0 28px; text-wrap: balance; }
 h1 .d { color: var(--design); }
 h1 .s { color: var(--sec); }
-.lede { max-width: 56ch; font-size: 20px; color: var(--muted); margin: 0; }
-
-/* index */
-.idx { border-top: 2px solid var(--ink); }
-.idx a { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; padding-block: 28px; border-bottom: 1px solid var(--line); text-decoration: none; }
-.idx a:hover .arrow { transform: translateX(6px); }
-.idx a:hover h3 { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
-.idx svg { width: 56px; height: 56px; }
-.idx .path { font-family: var(--mono); font-size: 13px; margin: 0 0 4px; }
-.idx h3 { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 4.5vw, 40px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 6px; }
-.idx p.d { margin: 0; color: var(--muted); max-width: 52ch; }
-.idx .arrow { font-family: var(--mono); font-size: 22px; transition: transform 0.2s; }
-.idx a.design .path, .idx a.design .arrow { color: var(--design); }
-.idx a.sec .path, .idx a.sec .arrow { color: var(--sec); }
-.idx a.design h3 { text-decoration-color: var(--design); }
-.idx a.sec h3 { text-decoration-color: var(--sec); }
-.soon { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-.f-d { fill: var(--design); } .f-s { fill: var(--sec); } .f-i { fill: var(--ink); }
-.k-d { stroke: var(--design); fill: none; } .k-s { stroke: var(--sec); fill: none; }
+.lede { max-width: 54ch; font-size: 18px; color: var(--muted); margin: 0 0 28px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 11px 22px; border-radius: 999px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid var(--ink); }
+.btn.primary { background: var(--ink); color: var(--bg); }
 
 /* sections */
 section { padding-block: clamp(40px, 7vw, 72px) 8px; }
 .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
-h2 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4.5vw, 44px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px; text-wrap: balance; max-width: 20ch; }
-.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; }
-.cols p { margin: 0 0 16px; color: var(--muted); }
-.cols p:first-child { color: var(--ink); font-size: 19px; }
+h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4.2vw, 40px); line-height: 1.1; letter-spacing: -0.035em; margin: 0 0 28px; text-wrap: balance; }
+h3.sub { font-family: var(--mono); font-weight: 500; font-size: 14px; margin: 0 0 16px; }
+h3.sub.d { color: var(--design); }
+h3.sub.s { color: var(--sec); }
+.block + .block { margin-top: 56px; }
 
-/* habits */
-.habits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 32px; margin-top: 32px; }
-.habits h4 { font-family: var(--display); font-weight: 800; font-size: 20px; margin: 0 0 6px; letter-spacing: -0.01em; }
-.habits p { margin: 0; color: var(--muted); font-size: 16px; }
-.habits div { border-top: 1px solid var(--line); padding-top: 16px; }
+/* design grid */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.tile { margin: 0; }
+.tile .art { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--card); aspect-ratio: 4 / 5; }
+.tile svg { display: block; width: 100%; height: 100%; }
+.tile figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 10px 2px 0; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.f-accent { fill: var(--accent); } .f-pop { fill: var(--pop); } .f-ink { fill: var(--ink); } .f-bg { fill: var(--bg); } .f-card { fill: var(--card); }
 
-/* skills */
-.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; }
-.skills h3 { font-family: var(--mono); font-weight: 500; font-size: 14px; margin: 0 0 14px; }
-.skills .d h3 { color: var(--design); }
-.skills .s h3 { color: var(--sec); }
-.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
-.tags li { font-size: 15px; padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--line); }
-.skills .d li { border-color: color-mix(in srgb, var(--design) 45%, var(--line)); }
-.skills .s li { border-color: color-mix(in srgb, var(--sec) 45%, var(--line)); }
-
-/* projects */
-.proj { border-top: 2px solid var(--ink); }
+/* security list */
+.proj { border-top: 1px solid var(--ink); }
 .proj .r { display: grid; grid-template-columns: 90px minmax(0, 1fr) auto; gap: 6px 24px; padding-block: 20px; border-bottom: 1px solid var(--line); align-items: baseline; }
-.proj .t { font-family: var(--mono); font-size: 12px; }
-.proj .t.d { color: var(--design); } .proj .t.s { color: var(--sec); }
-.proj h4 { font-family: var(--display); font-weight: 800; font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+.proj .t { font-family: var(--mono); font-size: 12px; color: var(--sec); }
+.proj h4 { font-family: var(--display); font-weight: 600; font-size: 20px; margin: 0; letter-spacing: -0.02em; }
 .proj p { margin: 2px 0 0; color: var(--muted); font-size: 16px; }
-.proj a { font-family: var(--mono); font-size: 13px; }
 .proj .na { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin: 14px 0 0; }
 
+/* about */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; }
+.cols p { margin: 0 0 16px; color: var(--muted); }
+.cols p:first-child { color: var(--ink); font-size: 19px; }
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; margin-top: 32px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.tags li { font-size: 15px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); }
+.skills .d li { border-color: color-mix(in srgb, var(--design) 45%, var(--line)); }
+.skills .s li { border-color: color-mix(in srgb, var(--sec) 45%, var(--line)); }
+
 /* contact */
-.contact { border: 2px solid var(--ink); border-radius: 20px; padding: clamp(24px, 5vw, 48px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px 40px; }
+.contact { border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 5vw, 48px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px 40px; }
 .contact h2 { margin-bottom: 12px; }
 .contact p { margin: 0; color: var(--muted); max-width: 44ch; }
 .lines { display: grid; gap: 12px; align-content: start; font-family: var(--mono); font-size: 14px; }
 .lines span { display: block; color: var(--muted); font-size: 12px; }
 .lines b { font-weight: 500; overflow-wrap: anywhere; }
-.rules { margin-top: 28px; font-family: var(--mono); font-size: 12px; color: var(--muted); border-left: 3px solid var(--sec); padding-left: 14px; max-width: 70ch; }
+.rules { margin-top: 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); border-left: 3px solid var(--sec); padding-left: 14px; max-width: 70ch; }
 footer { padding-top: 40px; font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
 
+/* back to top */
 .totop { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); cursor: pointer; display: grid; place-items: center; z-index: 5; }
 .totop svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .totop:hover { transform: translateY(-3px); }
-.totop:focus-visible { outline: 3px solid var(--design); outline-offset: 3px; }
+[hidden] { display: none !important; }
 
 @media (max-width: 720px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .cols, .skills, .contact { grid-template-columns: 1fr; }
-  .habits { grid-template-columns: 1fr; }
-  .idx a { grid-template-columns: 44px minmax(0, 1fr); }
-  .idx svg { width: 44px; height: 44px; }
-  .idx .arrow { display: none; }
   .proj .r { grid-template-columns: 1fr; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .idx .arrow { transition: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .totop:hover { transform: none; } }
 </style>
-<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="stylesheet" href="/assets/anim.css">
 <link rel="stylesheet" href="/assets/theme.css">
 <script src="/assets/bg.js" defer></script>
 <script src="/assets/anim.js" defer></script>
 </head>
 <body data-page="home">
-
 <canvas class="fx" id="fx" aria-hidden="true"></canvas>
+
 <div class="wrap">
   <header class="bar">
     <a class="logo" href="#top">Your Name</a>
-    <nav aria-label="Sections"><a href="#index">Pages</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
   </header>
 
   <div class="hero" id="top">
     <p class="status"><span><b>~/now</b></span><span class="tw" style="--n:30;--delay:0.50s">open for freelance design work</span><span class="tw last" style="--n:26;--delay:2.35s">practising ethical hacking</span></p>
     <h1>I <span class="d">design</span> it.<br>I <span class="s">test</span> it.</h1>
     <p class="lede">I am a graphic designer and an ethical hacker. Both jobs come down to the same habit: look closely until you see what everyone else missed.</p>
+    <div class="btns">
+      <a class="btn primary" href="#work">See my work</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
   </div>
 
-  <section id="index" style="padding-top:0">
-    <p class="eyebrow">Pages</p>
-    <div class="idx">
-      <a class="design" href="/design/">
-        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="22" cy="24" r="16" class="f-d"/><rect x="24" y="22" width="26" height="26" rx="4" class="k-d" stroke-width="3"/></svg>
-        <div>
-          <p class="path">/design</p>
-          <h3>Graphic design</h3>
-          <p class="d">Posters, logos, banners and product design. See the finished pieces and the services I offer.</p>
-        </div>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="sec" href="/security/">
-        <svg viewBox="0 0 56 56" aria-hidden="true"><rect x="4" y="8" width="48" height="40" rx="6" class="k-s" stroke-width="3"/><path d="M14 22 L24 29 L14 36" class="k-s" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="29" y="35" width="14" height="3.5" rx="1.5" class="f-s"/></svg>
-        <div>
-          <p class="path">/security</p>
-          <h3>Ethical hacking</h3>
-          <p class="d">Lab write-ups, practice challenges and security notes.</p>
-        </div>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
+  <section id="work" style="padding-top:0">
+    <p class="eyebrow">Work</p>
+    <h2>Selected work</h2>
+
+    <div class="block">
+      <h3 class="sub d">/design</h3>
+      <div class="grid">
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Poster placeholder"><rect width="300" height="375" class="f-accent"/><circle cx="150" cy="150" r="82" class="f-pop"/><rect y="270" width="300" height="105" class="f-ink"/><rect x="28" y="292" width="160" height="14" rx="3" class="f-bg"/><rect x="28" y="318" width="104" height="8" rx="3" class="f-bg"/><rect x="28" y="336" width="124" height="8" rx="3" class="f-bg"/></svg></div><figcaption><span>poster_01.png</span><span>Poster</span></figcaption></figure>
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Logo placeholder"><rect width="300" height="375" class="f-card"/><rect x="82" y="110" width="136" height="136" rx="34" class="f-accent"/><circle cx="182" cy="146" r="30" class="f-pop"/><rect x="104" y="276" width="92" height="10" rx="4" class="f-ink"/></svg></div><figcaption><span>logo_01.svg</span><span>Logo</span></figcaption></figure>
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Banner placeholder"><rect width="300" height="375" class="f-ink"/><rect y="0" width="300" height="130" class="f-accent"/><circle cx="214" cy="228" r="52" class="f-pop"/><rect x="28" y="206" width="90" height="12" rx="3" class="f-bg"/><rect x="28" y="230" width="62" height="8" rx="3" class="f-bg"/><rect x="28" y="248" width="76" height="8" rx="3" class="f-bg"/></svg></div><figcaption><span>banner_01.jpg</span><span>Banner</span></figcaption></figure>
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Product design placeholder"><rect width="300" height="375" class="f-card"/><rect x="82" y="86" width="136" height="230" rx="14" class="f-accent"/><rect x="82" y="160" width="136" height="80" class="f-pop"/><rect x="98" y="182" width="80" height="12" rx="3" class="f-ink"/><rect x="98" y="204" width="52" height="8" rx="3" class="f-ink"/><rect x="108" y="52" width="84" height="34" rx="8" class="f-ink"/></svg></div><figcaption><span>product_01.png</span><span>Product design</span></figcaption></figure>
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Poster placeholder"><rect width="300" height="375" class="f-pop"/><polygon points="0,375 0,150 300,60 300,375" class="f-accent"/><circle cx="210" cy="130" r="44" class="f-ink"/><rect x="28" y="304" width="150" height="14" rx="3" class="f-bg"/><rect x="28" y="330" width="100" height="8" rx="3" class="f-bg"/></svg></div><figcaption><span>poster_02.png</span><span>Poster</span></figcaption></figure>
+        <figure class="tile"><div class="art"><svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Logo placeholder"><rect width="300" height="375" class="f-accent"/><polygon points="150,110 232,254 68,254" class="f-pop"/><circle cx="150" cy="210" r="22" class="f-ink"/></svg></div><figcaption><span>logo_02.svg</span><span>Logo</span></figcaption></figure>
+      </div>
+      <p class="note">Placeholder tiles. Replace them with your finished pieces.</p>
+    </div>
+
+    <div class="block">
+      <h3 class="sub s">/security</h3>
+      <div class="proj">
+        <div class="r"><span class="t">/web</span><div><h4>Web app lab notes</h4><p>Walk-throughs of practice web apps built to be attacked, with the weakness and the fix.</p></div><span class="na">add link</span></div>
+        <div class="r"><span class="t">/network</span><div><h4>Network basics</h4><p>What I learned about scanning and reading network traffic on my own lab setup.</p></div><span class="na">add link</span></div>
+        <div class="r"><span class="t">/ctf</span><div><h4>Challenge write-ups</h4><p>Short explanations of challenges I solved and the idea behind each one.</p></div><span class="na">add link</span></div>
+      </div>
+      <p class="note">Sample entries. Replace them with your real write-ups.</p>
     </div>
   </section>
 
@@ -192,38 +165,16 @@ footer { padding-top: 40px; font-family: var(--mono); font-size: 12px; color: va
       <p>I make visuals for people who need to be noticed, and I test systems for people who need them to hold up.</p>
       <p>As a designer I take freelance orders for posters, logos, banners and product visuals. As an ethical hacker I practise on legal labs and practice platforms, and I write down what I learn so the next person can follow it.</p>
     </div>
-    <div class="habits">
-      <div><h4>Look closely</h4><p>A weak margin or a weak password both hide in plain sight. I check the small things first.</p></div>
-      <div><h4>Question the default</h4><p>Why this font, why this port, why this permission. Defaults are where mistakes live.</p></div>
-      <div><h4>Write it down</h4><p>A design brief and a security report share one rule: if the reader cannot act on it, it is not finished.</p></div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <p class="eyebrow">Skills</p>
-    <h2>What I work with</h2>
     <div class="skills">
       <div class="d">
-        <h3>/design</h3>
-        <ul class="tags"><li>Posters</li><li>Logo design</li><li>Banners</li><li>Product design</li><li>Typography</li><li>Layout and colour</li></ul>
+        <h3 class="sub d">/design</h3>
+        <ul class="tags"><li>Posters</li><li>Logo design</li><li>Banners</li><li>Product design</li><li>Typography</li></ul>
       </div>
       <div class="s">
-        <h3>/security</h3>
-        <ul class="tags"><li>Networking basics</li><li>Linux</li><li>Web app security</li><li>OWASP Top 10</li><li>Reconnaissance</li><li>Clear reporting</li></ul>
+        <h3 class="sub s">/security</h3>
+        <ul class="tags"><li>Networking basics</li><li>Linux</li><li>Web app security</li><li>OWASP Top 10</li><li>Clear reporting</li></ul>
       </div>
     </div>
-  </section>
-
-  <section id="projects">
-    <p class="eyebrow">Projects</p>
-    <h2>Selected projects</h2>
-    <div class="proj">
-      <div class="r"><span class="t d">/design</span><div><h4>Poster series</h4><p>A set of posters for local events and small brands.</p></div><a href="/design/">View →</a></div>
-      <div class="r"><span class="t d">/design</span><div><h4>Logo and brand marks</h4><p>Simple logos built to work at any size.</p></div><a href="/design/">View →</a></div>
-      <div class="r"><span class="t s">/security</span><div><h4>Lab write-ups</h4><p>Step-by-step notes from practice machines, with what I tried and what worked.</p></div><a href="/security/">View →</a></div>
-      <div class="r"><span class="t s">/security</span><div><h4>Challenge notes</h4><p>Short explanations of challenges I solved and the idea behind each fix.</p></div><a href="/security/">View →</a></div>
-    </div>
-    <p class="note">Sample entries. Replace them with your real projects.</p>
   </section>
 
   <section id="contact">
@@ -236,15 +187,12 @@ footer { padding-top: 40px; font-family: var(--mono); font-size: 12px; color: va
       <div class="lines">
         <div><span>Fiverr</span><b>fiverr.com/your-username</b></div>
         <div><span>Email</span><b>you@example.com</b></div>
-        <div><span>Design page</span><b><a href="/design/">/design</a></b></div>
-        <div><span>Security page</span><b><a href="/security/">/security</a></b></div>
       </div>
     </div>
     <p class="rules">Rules of engagement: I only test systems I own or have written permission to test.</p>
     <footer><span>© 2026 Your Name</span><span>Designer · Ethical hacker</span></footer>
   </section>
 </div>
-
 
 <button class="totop" id="totop" type="button" aria-label="Back to top" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>

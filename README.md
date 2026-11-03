@@ -1,11 +1,13 @@
 # My Portfolio
 
-A plain HTML portfolio with three pages. There is no build step.
+A single-page, plain HTML portfolio. There is no build step.
 
 ```
-index.html            main portfolio  ->  /
-design/index.html     graphic design  ->  /design/
-security/index.html   ethical hacking ->  /security/
+index.html            the whole portfolio (one page)
+assets/theme.css      colors and fonts
+assets/anim.css       animation styles
+assets/anim.js        scroll progress bar and reveal effects
+assets/bg.js          dot-grid background
 images/               put your design images here
 vercel.json           Vercel settings
 ```
@@ -34,20 +36,17 @@ git push -u origin main
 Every time you push to GitHub, Vercel updates your site automatically.
 To use your own domain, open the project on Vercel and go to **Settings > Domains**.
 
-## Things to replace
+## Things to replace in index.html
 
-Search for these in each `index.html` and put in your own details.
-
-- `Your Name` and the `YN` initials (main page, design page, security page)
-- `fiverr.com/your-username` and `you@example.com` (contact sections)
-- The placeholder tiles in `design/index.html`. Save your finished images in `images/` and swap each `<svg>` tile for `<img src="/images/your-file.jpg" alt="Describe the piece">`.
-- The sample project entries on the main page and in `security/index.html`
+- `Your Name` (top bar and footer)
+- `fiverr.com/your-username` and `you@example.com` (contact section)
+- The six placeholder tiles in the design grid. Save your finished images in `images/` and swap each `<svg>` tile for `<img src="/images/your-file.jpg" alt="Describe the piece">`.
+- The three sample security entries, and the "add link" labels
 - The skill lists, so they match what you really do
 
 ## Notes
 
 - Fonts load from Google Fonts, so no extra files are needed.
-- `assets/theme.css` holds the colors and fonts for all three pages. Change the values at the top to restyle the whole site.
-- `assets/anim.css` and `assets/anim.js` hold the page animations. `assets/bg.js` draws the dot-grid background.
+- `assets/theme.css` holds the colors and fonts. Change the values at the top to restyle the whole page.
 - All animation stays still for visitors who have "reduce motion" turned on.
-- On the security page, only describe testing on systems you own or have written permission to test.
+- Only describe security testing on systems you own or have written permission to test.
